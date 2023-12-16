@@ -30,3 +30,9 @@ https://www.h2database.com/html/cheatSheet.html
 + 위 사이클은 guest.html을 위한 동작입니다.
 + 게시글 수정 기능 -> 12. 15 일까지 추가 예정입니다.
 + sample.html은 현재로서는 이용하지 않습니다.
++ ddl 추가
+
+### 231210 까지의 수정사항
++ update 기능 추가하였습니다.
++ (update는 delete와 다르게 '사용자가 수정한 내용'을 매개변수로 받으므로 type에서 hidden을 쓰면 안됨)
++ 위의 기능을 update 페이지를 만들어서 따로 뺄 예정입니다.
