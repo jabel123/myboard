@@ -1,11 +1,12 @@
 package com.jihyun.myboard.controller;
 
 import com.jihyun.myboard.service.ApiService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
+@Slf4j
 @Controller
 public class ApiController {
 
@@ -30,8 +31,8 @@ public class ApiController {
         model.addAttribute("originalText", text);
         model.addAttribute("result", result);
 
-        System.out.println("타임리프 result: " + result);
-        System.out.println("post wordtran 실행");
+        log.info("타임리프 result: " + result);
+        log.info("post wordtran 실행");
 
        return "word";
     }
