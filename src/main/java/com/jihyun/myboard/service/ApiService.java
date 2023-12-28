@@ -31,20 +31,20 @@ public class ApiService {
         requestHeaders.put("X-Naver-Client-Secret", CLIENT_SECRET);
 
         String responseBody = post(API_URL, requestHeaders, transWord, srcLang, targetLang);
-        log.info("responseBody: " + responseBody);
+        log.info("responseBody: {}", responseBody);
 
         // JSON 객체로 파싱
         JSONObject jsonObj = new JSONObject(responseBody);
         // 'translatedText' 값을 추출
         String translatedText = jsonObj.getJSONObject("message").getJSONObject("result").getString("translatedText");
 
-        log.info(translatedText);
+        log.info("translatedText: {}", translatedText);
         return translatedText;
     }
 
     public static String post(String apiUrl, Map<String, String> requestHeaders, String text, String srcLang, String targetLang) {
         HttpURLConnection con = connect(apiUrl);
-        String postParams = "source="+srcLang+"&target="+targetLang+"&text="+text; //원본언어: 한국어 (ko) -> 목적언어: 영어 (en)
+        String postParams = "source=" + srcLang + "&target=" + targetLang + "&text=" + text; //원본언어: 한국어 (ko) -> 목적언어: 영어 (en)
         try {
             con.setRequestMethod("POST");
             for (Map.Entry<String, String> header : requestHeaders.entrySet()) {
