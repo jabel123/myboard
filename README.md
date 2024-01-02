@@ -36,3 +36,7 @@ https://www.h2database.com/html/cheatSheet.html
 + update 기능 추가하였습니다.
 + (update는 delete와 다르게 '사용자가 수정한 내용'을 매개변수로 받으므로 type에서 hidden을 쓰면 안됨)
 + 위의 기능을 update 페이지를 만들어서 따로 뺄 예정입니다.
+
+### 240102
++ 로그인 페이지 자바스크립트로 구현 중
++ 컨트롤러에 등록할 방법 찾기
