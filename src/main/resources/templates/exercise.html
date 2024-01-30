@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>오늘의 운동</h2>
+<form action="/exercise" method="post">
+    <input type="text" id="content" name="content" placeholder="운동 기록을 입력하세요">
+    <input type="text" id="writer" name="writer" placeholder="이름을 입력하세요">
+    <input type="submit" value="등록">
+    <p>
+    <p>
+    <p>
+</form>
+
+
+<div th:each="result : ${selectExResult}">
+    <input type="hidden" th:value="${result.id}">
+    <span th:text="${result.content}"></span>
+    <span th:text="${result.writer}"></span>
+    <form action="deleteEx" method="post">
+        <input type="hidden" name="id" th:value="${result.id}">
+        <input type="hidden" name="content" th:value="${result.content}">
+        <input type="hidden" name="writer" th:value="${result.writer}">
+        <input type="submit" value="삭제">
+        <a th:href="@{/exercise/detail/{idValue}(idValue=${result.id})}">수정</a>
+    </form>
+</div>
+
+<!-- 페이지네이션 -->
+<div class="pagination">
+    <ul style="display: flex;">
+        <li style="margin-right: 10px; list-style: none;">
+            <a th:if="${page != 1}" th:href="@{/exercise/contentlist(page=1)}" >&laquo; 맨처음</a>
+        </li>
+        <!--            <li>-->
+        <!--                <a th:if="${page > 1}" th:href="@{/members/contentlist(page=${(page-1)})}" style="margin-right: 10px; list-style: none;">이전</a>-->
+        <!--            </li>-->
+        <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" style="margin-right: 10px; list-style: none;">
+            <a th:href="@{/exercise/contentlist(page=${pageNumber})}" th:text="${pageNumber}"></a>
+        </li>
+        <li style="margin-right: 10px; list-style: none;">
+            <a th:if="${page < totalPages}" th:href="@{/exercise/contentlist(page=${page+1})}" >다음</a>
+        </li>
+        <li style="margin-right: 10px; list-style: none;">
+            <a th:if="${page < totalPages}" th:href="@{/exercise/contentlist(page=${totalPages})}" >맨끝 &raquo;</a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+</body>
+</html>
