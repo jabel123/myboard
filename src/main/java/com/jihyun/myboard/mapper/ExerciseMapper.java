@@ -7,6 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface ExerciseMapper {
+
+    List<Exercise> contentListView(int offset);
+    int getContentCount();
+
     public void insertEx(String content, String writer);
 
     public List<Exercise> selectEx();

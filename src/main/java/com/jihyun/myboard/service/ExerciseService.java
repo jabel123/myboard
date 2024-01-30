@@ -17,6 +17,16 @@ public class ExerciseService {
         this.exerciseMapper = exerciseMapper;
     }
 
+    //페이지네이션 포함
+    public List<Exercise> getContentListView(int offset) {
+        return exerciseMapper.contentListView(offset);
+    }
+
+    //페이지네이션
+    public int getContentCount() {
+        return exerciseMapper.getContentCount();
+    }
+
     public void insertEx(String content, String writer) {
         exerciseMapper.insertEx(content, writer);
     }

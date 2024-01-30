@@ -25,7 +25,19 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise")
-    public String exersice(Model model) {
+    public String exersice(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+        int pageSize = 5; // 페이지당 게시글 수
+        int totalCount = exerciseService.getContentCount();
+        int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+
+        int offset = (page - 1) * pageSize;
+        List<Exercise> contentList = exerciseService.getContentListView(offset);
+
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("contentList", contentList);
+        model.addAttribute("page", page);
+
+
         List<Exercise> selectExResult = exerciseService.selectEx();
         model.addAttribute("selectExResult", selectExResult);
         return "/exercise";
@@ -49,18 +61,18 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise/{idValue}")
-    public String exerciseSelectDetail(@PathVariable("idValue") String idValue, Model model) {
+    public String exerciseSelectDetail(@PathVariable("idValue") String idValue, Model model,
+                                       @RequestParam(value = "page", defaultValue = "1") int page) {
         Exercise exercise = (exerciseService.exerciseSelectDetail(idValue));
         model.addAttribute("exercise", exercise);
         return "/exerciseDetail";
     }
 
-    @PostMapping("/exercise/{idValue}")
-    public String exerciseUpdateDetail(@PathVariable("idValue") String idValue, //바로 링크에 있는 idValue 값을 넣으면 안되는 이유
-                                       @RequestParam String id,
+    @PostMapping("/exercise/detail")
+    public String exerciseUpdateDetail(@RequestParam String id,
                                        @RequestParam String content,
                                        @RequestParam String writer) {
-//        exerciseService.exerciseUpdateDetail(idValue, content, writer); 이건 안되는 이유?
+
         exerciseService.exerciseUpdateDetail(id, content, writer);
         return "redirect:/exercise";
     }
