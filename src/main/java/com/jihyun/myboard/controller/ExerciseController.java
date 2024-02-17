@@ -38,8 +38,6 @@ public class ExerciseController {
         model.addAttribute("page", page);
 
 
-        List<Exercise> selectExResult = exerciseService.selectEx();
-        model.addAttribute("selectExResult", selectExResult);
         return "/exercise";
     }
 
@@ -60,7 +58,7 @@ public class ExerciseController {
         return "redirect:/exercise";
     }
 
-    @GetMapping("/exercise/{idValue}")
+    @GetMapping("/exercise/detail/{idValue}")
     public String exerciseSelectDetail(@PathVariable("idValue") String idValue, Model model,
                                        @RequestParam(value = "page", defaultValue = "1") int page) {
         Exercise exercise = (exerciseService.exerciseSelectDetail(idValue));

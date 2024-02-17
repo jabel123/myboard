@@ -27,9 +27,6 @@
         VALUES (#{content}, #{writer});
     </insert>
 
-    <select id="selectEx" resultType="com.jihyun.myboard.entity.Exercise">
-        select id, content, writer from Exercise;
-    </select>
 
     <delete id="deleteEx" parameterType="com.jihyun.myboard.entity.Exercise">
         DELETE FROM Exercise WHERE id = #{id} and content = #{content} and writer = #{writer};

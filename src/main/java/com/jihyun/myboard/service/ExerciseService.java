@@ -31,11 +31,6 @@ public class ExerciseService {
         exerciseMapper.insertEx(content, writer);
     }
 
-    public List<Exercise> selectEx() {
-        List<Exercise> selectExResult = exerciseMapper.selectEx();
-        return selectExResult;
-    }
-
     public void deleteEx(String id, String content, String writer) {
         exerciseMapper.deleteEx(id, content, writer);
     }
