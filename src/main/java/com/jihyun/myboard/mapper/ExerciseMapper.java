@@ -13,8 +13,6 @@ public interface ExerciseMapper {
 
     public void insertEx(String content, String writer);
 
-    public List<Exercise> selectEx();
-
     public void deleteEx(String id, String content, String writer);
 
     public Exercise exerciseSelectDetail(String idValue);
