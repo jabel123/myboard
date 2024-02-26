@@ -25,17 +25,23 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise")
-    public String exersice(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String exersice(Model model,
+                           @RequestParam(value = "page", defaultValue = "1") int page,
+                           @RequestParam(value = "keword") String keword) {
         int pageSize = 5; // 페이지당 게시글 수
-        int totalCount = exerciseService.getContentCount();
+        int totalCount = exerciseService.getContentCount(keword);
         int totalPages = (int) Math.ceil((double) totalCount / pageSize);
 
         int offset = (page - 1) * pageSize;
-        List<Exercise> contentList = exerciseService.getContentListView(offset);
+        List<Exercise> contentList = exerciseService.kewordSelect(offset, keword);
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("contentList", contentList);
         model.addAttribute("page", page);
+
+
+
+        log.info(keword);
 
 
         return "/exercise";
