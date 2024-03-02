@@ -20,6 +20,7 @@
     <select id="getContentCount" resultType="int">
         SELECT COUNT(*)
         FROM Exercise
+        WHERE content like '%'||#{keyword}||'%' OR writer like '%'||#{keyword}||'%'
     </select>
 
     <insert id="insertEx" parameterType="String">
@@ -40,5 +41,21 @@
         UPDATE Exercise SET content = #{content}, writer = #{writer}
         where id = #{id};
     </update>
+
+    <!-- 검색할때 검색어가 포함된 게시글만 조회하는 쿼리  -->
+    <select id="kewordSelect" resultType="com.jihyun.myboard.entity.Exercise">
+        SELECT
+            content,
+            writer,
+            id
+
+        FROM
+            Exercise
+        WHERE content like '%'||#{keyword}||'%' OR writer like '%'||#{keyword}||'%'
+        ORDER BY id DESC
+
+            LIMIT #{offset}, 5
+    </select>
+
 
 </mapper>

@@ -15,11 +15,14 @@
     <p>
 </form>
 
-
-<div th:each="result : ${contentList}">
+<div>
+    <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
+    <button id="searchButton">검색</button>
+</div>
+<div th:each="result : ${contentList}" class="resultItem">
     <input type="hidden" th:value="${result.id}">
-    <span th:text="${result.content}"></span>
-    <span th:text="${result.writer}"></span>
+    <span class="content" th:text="${result.content}"></span>
+    <span class="writer" th:text="${result.writer}"></span>
     <form action="deleteEx" method="post">
         <input type="hidden" name="id" th:value="${result.id}">
         <input type="hidden" name="content" th:value="${result.content}">
@@ -47,8 +50,18 @@
     </ul>
 </div>
 
+<script th:inline="javascript">
+    const searchBtn = document.querySelector("#searchButton");
+    const searchValue = document.querySelector("#search");
 
 
+    function btnClick() {
+        const keword = searchValue.value;
+        location.href = "http://localhost:8080/exercise/?page=1&keword=" + keword;
+    }
+
+    searchBtn.addEventListener("click", btnClick);
+</script>
 
 </body>
 </html>

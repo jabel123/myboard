@@ -23,8 +23,8 @@ public class ExerciseService {
     }
 
     //페이지네이션
-    public int getContentCount() {
-        return exerciseMapper.getContentCount();
+    public int getContentCount(String keyword) {
+        return exerciseMapper.getContentCount(keyword);
     }
 
     public void insertEx(String content, String writer) {
@@ -43,5 +43,10 @@ public class ExerciseService {
     public void exerciseUpdateDetail(String id, String content, String writer) {
         exerciseMapper.exerciseUpdateDetail(id, content, writer);
 
+    }
+
+    // 검색어
+    public List<Exercise> kewordSelect(int offset, String keyword) {
+        return exerciseMapper.kewordSelect(offset, keyword);
     }
 }
