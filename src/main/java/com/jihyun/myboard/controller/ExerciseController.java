@@ -33,7 +33,7 @@ public class ExerciseController {
         int totalPages = (int) Math.ceil((double) totalCount / pageSize);
 
         int offset = (page - 1) * pageSize;
-        List<Exercise> contentList = exerciseService.keywordSelect(offset, keyword);
+        List<Exercise> contentList = exerciseService.selectKeyword(offset, keyword);
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("contentList", contentList);

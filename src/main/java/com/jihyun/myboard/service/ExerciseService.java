@@ -46,7 +46,7 @@ public class ExerciseService {
     }
 
     // 검색어
-    public List<Exercise> keywordSelect(int offset, String keyword) {
-        return exerciseMapper.keywordSelect(offset, keyword);
+    public List<Exercise> selectKeyword(int offset, String keyword) {
+        return exerciseMapper.selectKeyword(offset, keyword);
     }
 }
