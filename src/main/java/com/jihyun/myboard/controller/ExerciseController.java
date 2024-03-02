@@ -27,22 +27,22 @@ public class ExerciseController {
     @GetMapping("/exercise")
     public String exersice(Model model,
                            @RequestParam(value = "page", defaultValue = "1") int page,
-                           @RequestParam(value = "keword") String keword) {
+                           @RequestParam(value = "keyword",  required = false, defaultValue = "") String keyword) {
         int pageSize = 5; // 페이지당 게시글 수
-        int totalCount = exerciseService.getContentCount(keword);
+        int totalCount = exerciseService.getContentCount(keyword);
         int totalPages = (int) Math.ceil((double) totalCount / pageSize);
 
         int offset = (page - 1) * pageSize;
-        List<Exercise> contentList = exerciseService.kewordSelect(offset, keword);
+        List<Exercise> contentList = exerciseService.keywordSelect(offset, keyword);
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("contentList", contentList);
         model.addAttribute("page", page);
+        model.addAttribute("keyword", keyword);
+        // CTL + Shift + R 정해진 문자열 바꾸기
+        // CTL + Shift + F 전체 찾기
 
-
-
-        log.info(keword);
-
+        log.info(keyword);
 
         return "/exercise";
     }

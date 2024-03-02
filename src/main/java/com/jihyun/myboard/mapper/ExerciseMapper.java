@@ -19,5 +19,5 @@ public interface ExerciseMapper {
 
     public void exerciseUpdateDetail(String id, String content, String writer);
 
-    List<Exercise> kewordSelect(int offset, String keyword);
+    List<Exercise> keywordSelect(int offset, String keyword);
 }

@@ -16,7 +16,7 @@
 </form>
 
 <div>
-    <input type="text" id="search" name="search" placeholder="검색어를 입력하세요">
+    <input type="text" id="search" name="search" placeholder="검색어를 입력하세요" th:value="${keyword}">
     <button id="searchButton">검색</button>
 </div>
 <div th:each="result : ${contentList}" class="resultItem">
@@ -36,16 +36,16 @@
 <div class="pagination">
     <ul style="display: flex;">
         <li style="margin-right: 10px; list-style: none;">
-            <a th:if="${page != 1}" th:href="@{/exercise/(page=1)}" >&laquo; 맨처음</a>
+            <a th:if="${page != 1}" th:href="@{/exercise/(page=1, keyword=${keyword})}" >&laquo; 맨처음</a>
         </li>
         <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" style="margin-right: 10px; list-style: none;">
-            <a th:href="@{/exercise/(page=${pageNumber})}" th:text="${pageNumber}"></a>
+            <a th:href="@{/exercise/(page=${pageNumber}, keyword=${keyword})}" th:text="${pageNumber}"></a>
         </li>
         <li style="margin-right: 10px; list-style: none;">
-            <a th:if="${page < totalPages}" th:href="@{/exercise/(page=${page+1})}" >다음</a>
+            <a th:if="${page < totalPages}" th:href="@{/exercise/(page=${page+1}, keyword=${keyword})}" >다음</a>
         </li>
         <li style="margin-right: 10px; list-style: none;">
-            <a th:if="${page < totalPages}" th:href="@{/exercise/(page=${totalPages})}" >맨끝 &raquo;</a>
+            <a th:if="${page < totalPages}" th:href="@{/exercise/(page=${totalPages}, keyword=${keyword})}" >맨끝 &raquo;</a>
         </li>
     </ul>
 </div>
@@ -56,8 +56,8 @@
 
 
     function btnClick() {
-        const keword = searchValue.value;
-        location.href = "http://localhost:8080/exercise/?page=1&keword=" + keword;
+        const keyword = searchValue.value;
+        location.href = "http://localhost:8080/exercise/?page=1&keyword=" + keyword;
     }
 
     searchBtn.addEventListener("click", btnClick);
