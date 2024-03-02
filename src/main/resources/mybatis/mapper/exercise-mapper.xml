@@ -43,7 +43,7 @@
     </update>
 
     <!-- 검색할때 검색어가 포함된 게시글만 조회하는 쿼리  -->
-    <select id="kewordSelect" resultType="com.jihyun.myboard.entity.Exercise">
+    <select id="selectKeyword" resultType="com.jihyun.myboard.entity.Exercise">
         SELECT
             content,
             writer,
