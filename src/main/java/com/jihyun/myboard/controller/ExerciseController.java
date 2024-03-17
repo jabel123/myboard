@@ -4,13 +4,13 @@ import com.jihyun.myboard.entity.Exercise;
 import com.jihyun.myboard.service.ExerciseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.util.List;
 
 @Slf4j
@@ -39,17 +39,18 @@ public class ExerciseController {
         model.addAttribute("contentList", contentList);
         model.addAttribute("page", page);
         model.addAttribute("keyword", keyword);
-        // CTL + Shift + R 정해진 문자열 바꾸기
-        // CTL + Shift + F 전체 찾기
+        // Cmd + Shift + R 정해진 문자열 바꾸기
+        // Cmd + Shift + F 전체 찾기
 
         log.info(keyword);
 
         return "/exercise";
     }
 
-    @PostMapping("/exercise")
+    @PostMapping(value = "/exercise", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public String insertEx(@RequestParam String content,
-                           @RequestParam String writer) {
+                           @RequestParam String writer,
+                           @RequestPart MultipartFile document) {
         exerciseService.insertEx(content, writer);
         log.info("등록한 내용: {}, {}", content, writer);
         return "redirect:/exercise";
