@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -18,6 +20,7 @@ import java.util.List;
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
+    public String uploadDir = "/Users/mozzi/Desktop/선생님PR용/src/main/resources/static/img/";
 
     @Autowired
     public ExerciseController(ExerciseService exerciseService) {
@@ -51,7 +54,21 @@ public class ExerciseController {
     public String insertEx(@RequestParam String content,
                            @RequestParam String writer,
                            @RequestPart MultipartFile document) {
-        exerciseService.insertEx(content, writer);
+        if (document.isEmpty()) {
+            exerciseService.insertEx(content, writer, null);
+            return "redirect:/exercise";
+        }
+
+        try {
+            // 파일 저장 경로에 업로드된 파일 저장
+            String filename = document.getOriginalFilename();
+            document.transferTo(new File(uploadDir + filename));
+            exerciseService.insertEx(content, writer, filename);
+
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+
         log.info("등록한 내용: {}, {}", content, writer);
         return "redirect:/exercise";
     }

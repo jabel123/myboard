@@ -24,6 +24,8 @@
     <input type="hidden" th:value="${result.id}">
     <span class="content" th:text="${result.content}"></span>
     <span class="writer" th:text="${result.writer}"></span>
+    <img th:src="@{/image/{filename}(filename=${result.filename})}" alt="Image" width="100px" height="100px">
+<!--    <span th:text="${result.filename}"></span>-->
     <form action="deleteEx" method="post">
         <input type="hidden" name="id" th:value="${result.id}">
         <input type="hidden" name="content" th:value="${result.content}">

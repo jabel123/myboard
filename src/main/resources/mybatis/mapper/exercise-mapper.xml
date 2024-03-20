@@ -6,7 +6,8 @@
         SELECT
             content,
             writer,
-            id
+            id,
+            filename
 
         FROM
             Exercise
@@ -24,8 +25,8 @@
     </select>
 
     <insert id="insertEx" parameterType="String">
-        INSERT INTO Exercise (content, writer)
-        VALUES (#{content}, #{writer});
+        INSERT INTO Exercise (content, writer, filename)
+        VALUES (#{content}, #{writer}, #{filename});
     </insert>
 
 
@@ -47,7 +48,8 @@
         SELECT
             content,
             writer,
-            id
+            id,
+            filename
 
         FROM
             Exercise
