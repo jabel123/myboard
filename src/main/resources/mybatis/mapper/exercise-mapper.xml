@@ -35,7 +35,7 @@
     </delete>
 
     <select id="exerciseSelectDetail" resultType="com.jihyun.myboard.entity.Exercise">
-        select id, content, writer from Exercise where id = #{idValue};
+        select id, content, writer, filename from Exercise where id = #{idValue};
     </select>
 
     <update id="exerciseUpdateDetail" parameterType="com.jihyun.myboard.entity.Exercise">

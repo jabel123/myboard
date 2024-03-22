@@ -73,12 +73,25 @@ public class ExerciseController {
         return "redirect:/exercise";
     }
 
-    @PostMapping("/deleteEx")
+    @PostMapping( "/deleteEx")
     public String deleteEx(@RequestParam String id,
                            @RequestParam String content,
-                           @RequestParam String writer) {
+                           @RequestParam String writer,
+                           @RequestParam String filename) {
+
+        if (filename.equals(null)) {
+            exerciseService.deleteEx(id, content, writer);
+            return "redirect:/exercise";
+        }
+
+        // 파일 저장 경로에 업로드된 파일 삭제
+        String fileroute = uploadDir + filename;
+        File fileToDelete = new File(fileroute);
+        fileToDelete.delete();
         exerciseService.deleteEx(id, content, writer);
+
         log.info("삭제된 내용: {}, {}, {}", id, content, writer);
+
         return "redirect:/exercise";
     }
 
