@@ -24,10 +24,12 @@
     <input type="hidden" th:value="${result.id}">
     <span class="content" th:text="${result.content}"></span>
     <span class="writer" th:text="${result.writer}"></span>
-    <form action="deleteEx" method="post">
+    <img th:if="${result.filename != null}" th:src="@{/image/{filename}(filename=${result.filename})}" alt="Image" width="100px" height="100px">
+    <form action="deleteEx" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" th:value="${result.id}">
         <input type="hidden" name="content" th:value="${result.content}">
         <input type="hidden" name="writer" th:value="${result.writer}">
+        <input type="hidden" name="filename" th:value="${result.filename}">
         <input type="submit" value="삭제">
         <a th:href="@{/exercise/detail/{idValue}(idValue=${result.id})}">수정</a>
     </form>

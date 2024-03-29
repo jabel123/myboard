@@ -27,8 +27,8 @@ public class ExerciseService {
         return exerciseMapper.getContentCount(keyword);
     }
 
-    public void insertEx(String content, String writer) {
-        exerciseMapper.insertEx(content, writer);
+    public void insertEx(String content, String writer, String filename) {
+        exerciseMapper.insertEx(content, writer, filename);
     }
 
     public void deleteEx(String id, String content, String writer) {
