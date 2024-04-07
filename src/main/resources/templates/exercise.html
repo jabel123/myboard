@@ -35,6 +35,8 @@
     </form>
 </div>
 
+<div id="output"></div>
+
 <!-- 페이지네이션 -->
 <div class="pagination">
     <ul style="display: flex;">
@@ -64,6 +66,41 @@
     }
 
     searchBtn.addEventListener("click", btnClick);
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+        axios.get('http://localhost:8080/api/ex')
+            .then(function (response) {
+                const responseData = response.data.contentList[0].writer;
+                const outputDiv = document.getElementById("output");
+                outputDiv.innerText = responseData;
+
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+</script>
+
+<script>
+    const data = {
+        contentList: [
+            {content: "1", filename: "filename", id: "15", writer: "ㅈㅈ"},
+            {content: "2", filename: "filename", id: "16", writer: "ㅈㅈ"},
+            {content: "3", filename: "filename", id: "17", writer: "ㅈㅈ"},
+        ]
+    };
+
+    const content = data.contentList[0].writer;
+
+    const outputDiv = document.getElementById("output");
+    outputDiv.innerText = content;
 </script>
 
 </body>
