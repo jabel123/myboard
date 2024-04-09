@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>회원 가입</h2>
+<form action="/join" method="post" id="joinSubmit">
+    <input type="text" name="username" id="username" placeholder="아이디를 입력하세요"><br>
+    <input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요"><br>
+    <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인"><br>
+    <input type="button" id="joinButton" value="가입">
+</form>
+
+<script>
+    const joinButton = document.querySelector("#joinButton");
+    const passwordValue = document.querySelector("#password");
+    const pwCheckValue = document.querySelector("#pwcheck");
+
+    function btnClick() {
+        const pwValue = passwordValue.value;
+        const checkValue = pwCheckValue.value;
+
+        //비밀번호 체크
+        if (pwValue != checkValue) {
+            alert("비밀번호가 같지 않습니다.")
+            return;
+        }
+        //비밀번호가 같을때
+        const joinSubmit = document.querySelector("#joinSubmit");
+        joinSubmit.submit();
+    }
+
+    joinButton.addEventListener("click", btnClick);
+
+</script>
+</body>
+</html>
