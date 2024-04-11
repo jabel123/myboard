@@ -102,6 +102,24 @@
     const outputDiv = document.getElementById("output");
     outputDiv.innerText = content;
 </script>
+<script>
+    // 아이디 값 가져오기
+    const idCheck = document.getElementById("writer");
+    idCheck.addEventListener('input', function() {
+        // 입력된 아이디 값을 가져옵니다.
+        const username = usernameInput.value;
+        axios.get(`http://localhost:8080/check-username?username=${username}`)
+            .then(response => {
+                // 이미 가입된 아이디일 때
+                if (response.data === true) {
+                    alert('이미 가입된 아이디입니다.');
+                }
+            })
+            .catch(error => {
+                console.error('에러 발생');
+            })
+    });
+</script>
 
 </body>
 </html>
