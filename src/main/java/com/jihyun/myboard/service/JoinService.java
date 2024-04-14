@@ -19,4 +19,8 @@ public class JoinService {
     public void insertJoin(String username, String password) {
         joinMapper.insertJoin(username, password);
     }
+
+    public int checkUsernameExist(String username) {
+        return joinMapper.checkUsernameExist(username);
+    }
 }

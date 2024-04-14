@@ -11,4 +11,9 @@
         VALUES (#{username}, #{password});
     </insert>
 
+    <select id="checkUsernameExist" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM member WHERE username = #{username}
+    </select>
+
+
 </mapper>

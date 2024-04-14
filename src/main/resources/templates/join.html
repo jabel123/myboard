@@ -17,23 +17,41 @@
     const joinButton = document.querySelector("#joinButton");
     const passwordValue = document.querySelector("#password");
     const pwCheckValue = document.querySelector("#pwcheck");
+    const joinSubmit = document.querySelector("#joinSubmit");
 
-    function btnClick() {
+    async function btnClick() {
+        const username = document.getElementById('username').value;
+
+        // 아이디를 입력하지 않았을 때
+        if (username.length == 0) {
+            alert("아이디를 입력해주세요.")
+            return;
+        }
+
+        const response = await axios.get('http://localhost:8080/api/members/' + username);
+        if (response.data == 0) {
+            alert("사용 가능한 아이디입니다.")
+
+        } else {
+            alert("중복된 아이디입니다.")
+            return;
+        }
+
+        //비밀번호 체크
         const pwValue = passwordValue.value;
         const checkValue = pwCheckValue.value;
 
-        //비밀번호 체크
         if (pwValue != checkValue) {
             alert("비밀번호가 같지 않습니다.")
             return;
         }
         //비밀번호가 같을때
-        const joinSubmit = document.querySelector("#joinSubmit");
         joinSubmit.submit();
     }
 
     joinButton.addEventListener("click", btnClick);
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
