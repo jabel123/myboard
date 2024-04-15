@@ -3,7 +3,7 @@
 <mapper namespace="com.jihyun.myboard.mapper.JoinMapper">
 
     <select id="selectJoin" resultType="com.jihyun.myboard.entity.Join">
-        select username, password from member;
+        SELECT username, password FROM member;
     </select>
 
     <insert id="insertJoin" parameterType="String">
@@ -13,6 +13,10 @@
 
     <select id="checkUsernameExist" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM member WHERE username = #{username}
+    </select>
+
+    <select id="selectLogin" resultType="boolean">
+        SELECT username, password FROM member WHERE username = #{username} AND password = #{password};
     </select>
 
 

@@ -29,4 +29,15 @@ public class JoinApiController {
         return usernameExist;
     }
 
+    @PostMapping("/join/login")
+    public String selectLogin(@RequestParam("usernameIn") String username,
+                              @RequestParam("passwordIn") String password) {
+        log.info(username, password);
+
+        if(joinService.selectLogin(username, password)) {
+            return "success";
+        } else return "fail";
+
+    }
+
 }
