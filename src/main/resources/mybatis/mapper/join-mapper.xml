@@ -15,8 +15,8 @@
         SELECT COUNT(*) FROM member WHERE username = #{username}
     </select>
 
-    <select id="selectLogin" resultType="boolean">
-        SELECT username, password FROM member WHERE username = #{username} AND password = #{password};
+    <select id="selectLogin" resultType="com.jihyun.myboard.dto.LoginDTO">
+        SELECT username as usernameIn, role FROM member WHERE username = #{username} AND password = #{password};
     </select>
 
 
