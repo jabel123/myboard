@@ -12,6 +12,15 @@
     <input type="password" name="pwcheck" id="pwcheck" placeholder="비밀번호 확인"><br>
     <input type="button" id="joinButton" value="가입">
 </form>
+<br>
+<br>
+<h2>로그인</h2>
+<form action="/join/login" method="post" id="loginSubmit">
+    <input type="text" name="usernameIn" id="usernameIn" placeholder="아이디를 입력하세요"><br>
+    <input type="password" name="passwordIn" id="passwordIn" placeholder="비밀번호를 입력하세요"><br>
+    <input type="password" name="pwcheckIn" id="pwcheckIn" placeholder="비밀번호 확인"><br>
+    <input type="button" id="loginButton" value="가입">
+</form>
 
 <script>
     const joinButton = document.querySelector("#joinButton");
@@ -45,11 +54,42 @@
             alert("비밀번호가 같지 않습니다.")
             return;
         }
+
+
         //비밀번호가 같을때
         joinSubmit.submit();
     }
 
     joinButton.addEventListener("click", btnClick);
+
+</script>
+<script>
+    document.getElementById('loginButton').addEventListener('click', function() {
+        const username = document.getElementById('usernameIn').value;
+        const password = document.getElementById('passwordIn').value;
+        const pwcheck = document.getElementById('pwcheckIn').value;
+
+        // 비밀번호 확인
+        if (password !== pwcheck) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        axios.post('/join/login', { username, password })
+            .then(response => {
+                const result = response.data;
+
+                if (result === 'success') {
+                    alert('로그인 완료.');
+                } else {
+                    alert('로그인 실패.');
+                }
+            })
+            .catch(error => {
+                console.error('로그인 에러:', error);
+                alert('로그인 실패.');
+            });
+    });
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

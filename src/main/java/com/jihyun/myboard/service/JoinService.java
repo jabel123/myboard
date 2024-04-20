@@ -23,4 +23,8 @@ public class JoinService {
     public int checkUsernameExist(String username) {
         return joinMapper.checkUsernameExist(username);
     }
+
+    public boolean selectLogin(String username, String password) {
+        return joinMapper.selectLogin(username, password);
+    }
 }
