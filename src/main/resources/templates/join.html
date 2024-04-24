@@ -89,6 +89,11 @@
                     console.dir(localStorage.getItem("role"));
                     alert( localStorage.getItem("username") + ' 님이 로그인 하셨습니다. ' +
                         '권한: ' + localStorage.getItem("role"));
+
+                    setTimeout(() => {
+                        // 환영메시지 후 본 페이지로 이동
+                        window.location.href = 'http://localhost:8080/content';
+                    }, 1000);
                 } else {
                     alert('로그인 실패.');
                 }
