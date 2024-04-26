@@ -63,7 +63,35 @@
             }, 100);
         }
     }
-    window.onload = getUser; //페이지 로드될 때 바로 실행
+    window.onload = getUser; // 페이지 로드될 때 바로 실행
+</script>
+<script>
+    function clearForm() {
+        document.getElementById('review').value = ''; // 독후감란을 비우는 함수
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function submitReview() {
+        const review = document.getElementById('review').value;
+        const usernameElement = document.getElementById('username');
+        const username = usernameElement.textContent.substring(0, usernameElement.textContent.length - 4);
+
+        axios.post('/api/content', {
+            content: review,
+            author: username
+        })
+            .then(response => {
+                alert("작성자: " + response.data.author + " 작성 내용: " + response.data.content);
+                clearForm(); // 제출 버튼을 누르면 내용란을 초기화한다
+            })
+            .catch(error => {
+                console.error('오류 발생:', error);
+            });
+    }
+
+
 </script>
 </body>
 </html>
