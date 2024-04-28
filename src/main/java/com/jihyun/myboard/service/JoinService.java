@@ -1,5 +1,6 @@
 package com.jihyun.myboard.service;
 
+import com.jihyun.myboard.dto.LoginDTO;
 import com.jihyun.myboard.mapper.JoinMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class JoinService {
         return joinMapper.checkUsernameExist(username);
     }
 
-    public boolean selectLogin(String username, String password) {
+    public LoginDTO selectLogin(String username, String password) {
         return joinMapper.selectLogin(username, password);
     }
 }

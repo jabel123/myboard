@@ -75,12 +75,25 @@
             return;
         }
 
-        axios.post('/join/login', { username, password })
+        // @RequestParam 방식으로 보내기
+        axios.post('/join/login?usernameIn='+ username +'&passwordIn='+ password,
+            { usernameIn: username, passwordIn: password })
             .then(response => {
                 const result = response.data;
+                console.log(result);
 
-                if (result === 'success') {
-                    alert('로그인 완료.');
+                if (result) {
+                    localStorage.setItem("username", result.usernameIn);
+                    localStorage.setItem("role", result.role);
+                    console.dir(localStorage.getItem("username"));
+                    console.dir(localStorage.getItem("role"));
+                    alert( localStorage.getItem("username") + ' 님이 로그인 하셨습니다. ' +
+                        '권한: ' + localStorage.getItem("role"));
+
+                    setTimeout(() => {
+                        // 환영메시지 후 본 페이지로 이동
+                        window.location.href = 'http://localhost:8080/content';
+                    }, 1000);
                 } else {
                     alert('로그인 실패.');
                 }

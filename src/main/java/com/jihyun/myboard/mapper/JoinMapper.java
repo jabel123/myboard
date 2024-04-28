@@ -1,4 +1,5 @@
 package com.jihyun.myboard.mapper;
+import com.jihyun.myboard.dto.LoginDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -7,5 +8,5 @@ public interface JoinMapper {
 
     public int checkUsernameExist(String username);
 
-    public boolean selectLogin(String username, String password);
+    public LoginDTO selectLogin(String username, String password);
 }
