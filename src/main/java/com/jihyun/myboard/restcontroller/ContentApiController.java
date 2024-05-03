@@ -3,6 +3,7 @@ package com.jihyun.myboard.restcontroller;
 import com.jihyun.myboard.dto.ContentDTO;
 import com.jihyun.myboard.exception.MyException;
 import com.jihyun.myboard.service.ContentService;
+import com.jihyun.myboard.token.Main;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,8 @@ public class ContentApiController {
 //    @RequestBody 방식으로 보내기
     @PostMapping("/api/content")
     public ContentDTO getContentDTO(@RequestBody ContentDTO contentDTO) {
+        Main main = new Main();
+
         if (!contentDTO.getRole().equals("admin")) {
             throw new MyException("admin이 아닙니다");
         }
@@ -27,5 +30,15 @@ public class ContentApiController {
         contentService.insertContent(contentDTO.getContent(), contentDTO.getAuthor());
 
         return contentDTO;
+    }
+
+    @PostMapping("/role/check")
+    public String getRole(@RequestBody ContentDTO contentDTO) {
+        Main main = new Main();
+        String jwt = main.makeJwtToken(contentDTO.getAuthor(), contentDTO.getRole());
+        String jwtResult = String.valueOf(main.parseJwtToken(jwt));
+        System.out.println(jwt);
+
+        return jwtResult;
     }
 }

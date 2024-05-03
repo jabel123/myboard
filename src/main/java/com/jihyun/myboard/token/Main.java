@@ -14,15 +14,15 @@ import java.util.Date;
 public class Main {
     private static String SECRET_KEY = "AFHSUSFIHQASFEUOFHQFUOIQHFUIQWHFIOQHFIUAF";
 
-    public static void main(String[] args) {
-        String token = makeJwtToken();
-//        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteXRlYW0iLCJpYXQiOjE3MTQyNzAxNDUsImV4cCI6MTcxNDI3MTk0NSwiaWQiOiJteUlkIiwiZW1haWwiOiJteUlkQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiJ9.oeusGPuP7HqGWZ1n9Y38WqRz7sbAfwXCpNQjHfzbEtE";
-        System.out.println(token);
-        parseJwtToken(token);
-    }
+//    public static void main(String[] args) {
+//        String token = makeJwtToken();
+////        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteXRlYW0iLCJpYXQiOjE3MTQyNzAxNDUsImV4cCI6MTcxNDI3MTk0NSwiaWQiOiJteUlkIiwiZW1haWwiOiJteUlkQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiJ9.oeusGPuP7HqGWZ1n9Y38WqRz7sbAfwXCpNQjHfzbEtE";
+//        System.out.println(token);
+//        parseJwtToken(token);
+//    }
 
 //    토큰 만들기
-    public static String makeJwtToken() {
+    public static String makeJwtToken(String username, String role) {
         ContentDTO contentDTO = new ContentDTO();
         Date now = new Date();
         Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
@@ -32,8 +32,8 @@ public class Main {
                 .setIssuer("contentUser")
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis()))
-                .claim("username", contentDTO.getAuthor())
-                .claim("role", "user")
+                .claim("username", username)
+                .claim("role", role)
                 .signWith(key)
                 .compact();
     }
