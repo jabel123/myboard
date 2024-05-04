@@ -93,8 +93,25 @@
                 alert(error.response.data);
             });
     }
+</script>
+<script>
+    function getRole() {
+        const userValue = localStorage.getItem('username');
+        const role = localStorage.getItem("role");
 
-
+        axios.post('/role/check', {
+            username: userValue,
+            role: role
+        })
+            .then(response => {
+                alert("토큰 생성 완료");
+            })
+            .catch(error => {
+                console.error('오류 발생:', error);
+                alert(error.response.role);
+            });
+    }
+    window.onload = getRole; // 페이지 로드될 때 바로 실행
 </script>
 </body>
 </html>

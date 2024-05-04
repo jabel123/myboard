@@ -1,5 +1,6 @@
 package com.jihyun.myboard.token;
 
+import com.jihyun.myboard.dto.ContentDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -13,26 +14,26 @@ import java.util.Date;
 public class Main {
     private static String SECRET_KEY = "AFHSUSFIHQASFEUOFHQFUOIQHFUIQWHFIOQHFIUAF";
 
-    public static void main(String[] args) {
-        String token = makeJwtToken();
-//        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteXRlYW0iLCJpYXQiOjE3MTQyNzAxNDUsImV4cCI6MTcxNDI3MTk0NSwiaWQiOiJteUlkIiwiZW1haWwiOiJteUlkQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiJ9.oeusGPuP7HqGWZ1n9Y38WqRz7sbAfwXCpNQjHfzbEtE";
-        System.out.println(token);
-        parseJwtToken(token);
-    }
+//    public static void main(String[] args) {
+//        String token = makeJwtToken();
+////        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteXRlYW0iLCJpYXQiOjE3MTQyNzAxNDUsImV4cCI6MTcxNDI3MTk0NSwiaWQiOiJteUlkIiwiZW1haWwiOiJteUlkQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiJ9.oeusGPuP7HqGWZ1n9Y38WqRz7sbAfwXCpNQjHfzbEtE";
+//        System.out.println(token);
+//        parseJwtToken(token);
+//    }
 
 //    토큰 만들기
-    public static String makeJwtToken() {
+    public static String makeJwtToken(String username, String role) {
+        ContentDTO contentDTO = new ContentDTO();
         Date now = new Date();
         Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer("myteam")
+                .setIssuer("contentUser")
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + Duration.ofMinutes(30).toMillis()))
-                .claim("id", "myId")
-                .claim("email", "myId@gmail.com")
-                .claim("role", "user")
+                .claim("username", username)
+                .claim("role", role)
                 .signWith(key)
                 .compact();
     }
