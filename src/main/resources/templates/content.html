@@ -51,6 +51,7 @@
 <script>
     function getUser() {
         const userValue = localStorage.getItem('username');
+        const role = localStorage.getItem('role');
 
         if (userValue !== null) {
             const username = document.getElementById('username');
@@ -78,12 +79,18 @@
         const usernameElement = document.getElementById('username');
         const username = usernameElement.textContent.substring(0, usernameElement.textContent.length - 4);
         const role = localStorage.getItem("role");
+        const jwtToken = localStorage.getItem('jwt');
 
         axios.post('/api/content', {
             content: review,
             author: username,
             role: role
-        })
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                // JWT 토큰을 헤더에 포함시킵니다.
+                'Authorization': `${jwtToken}`
+            }})
             .then(response => {
                 alert("작성자: " + response.data.author + " 작성 내용: " + response.data.content);
                 clearForm(); // 제출 버튼을 누르면 내용란을 초기화한다
