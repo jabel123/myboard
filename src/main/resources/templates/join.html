@@ -85,6 +85,7 @@
                 if (result) {
                     localStorage.setItem("username", result.usernameIn);
                     localStorage.setItem("role", result.role);
+                    localStorage.setItem("jwt", result.jwt);
                     console.dir(localStorage.getItem("username"));
                     console.dir(localStorage.getItem("role"));
                     alert( localStorage.getItem("username") + ' 님이 로그인 하셨습니다. ' +
@@ -92,7 +93,7 @@
 
                     setTimeout(() => {
                         // 환영메시지 후 본 페이지로 이동
-                        window.location.href = 'http://localhost:8080/content';
+                        window.location.href = 'http://localhost:8080/contentlist';
                     }, 1000);
                 } else {
                     alert('로그인 실패.');

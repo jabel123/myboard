@@ -11,12 +11,12 @@ import java.security.Key;
 import java.time.Duration;
 import java.util.Date;
 
-public class Main {
+public class TokenUtil {
     private static String SECRET_KEY = "AFHSUSFIHQASFEUOFHQFUOIQHFUIQWHFIOQHFIUAF";
 
 //    public static void main(String[] args) {
 //        String token = makeJwtToken();
-////        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJteXRlYW0iLCJpYXQiOjE3MTQyNzAxNDUsImV4cCI6MTcxNDI3MTk0NSwiaWQiOiJteUlkIiwiZW1haWwiOiJteUlkQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiJ9.oeusGPuP7HqGWZ1n9Y38WqRz7sbAfwXCpNQjHfzbEtE";
+////        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjb250ZW50VXNlciIsImlhdCI6MTcxNDc4NTEwMywiZXhwIjoxNzE0Nzg2OTAzLCJyb2xlIjoidXNlciJ9.wXPDQIuLp742Ogc5mFbuYjmUAj23cpIP11Nwd1Rj7wk";
 //        System.out.println(token);
 //        parseJwtToken(token);
 //    }
