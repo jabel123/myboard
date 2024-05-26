@@ -21,28 +21,35 @@ public class ContentApiController {
 
 //    @RequestBody 방식으로 보내기
     @PostMapping("/api/content")
+    // 핵심 관점 - 게시글 저장하는 것
+    // 부가적인 관점 - 저장할 때에 사용자의 권한을 확인하는 것
     public ContentDTO getContentDTO(@RequestBody ContentDTO contentDTO,
                                     @RequestHeader("Authorization") String jwt) {
-        Claims claims = TokenUtil.parseJwtToken(jwt);
-        String tokenRole = (String) claims.get("role");
-        System.out.println(tokenRole);
-
-        if (!tokenRole.equals("admin")) {
-            throw new MyException("admin이 아닙니다");
-        }
+//        Claims claims = TokenUtil.parseJwtToken(jwt);
+//        String tokenRole = (String) claims.get("role");
+//        System.out.println(tokenRole);
+//
+//        if (!tokenRole.equals("admin")) {
+//            throw new MyException("admin이 아닙니다");
+//        }
         log.info(contentDTO.getContent(), contentDTO.getAuthor());
         contentService.insertContent(contentDTO.getContent(), contentDTO.getAuthor());
 
         return contentDTO;
     }
 
-    @PostMapping("/role/check")
-    public String getRole(@RequestBody ContentDTO contentDTO) {
-        TokenUtil tokenUtil = new TokenUtil();
-        String jwt = tokenUtil.makeJwtToken(contentDTO.getAuthor(), contentDTO.getRole());
-        String jwtResult = String.valueOf(tokenUtil.parseJwtToken(jwt));
-        System.out.println(jwt);
+        @PostMapping("/role/check")
+        public String getRole(@RequestBody ContentDTO contentDTO,
+                              @RequestHeader("Authorization") String jwt) {
+//            Claims claims = TokenUtil.parseJwtToken(jwt);
+//            String tokenRole = (String) claims.get("role");
+//            System.out.println(tokenRole);
+//
+//            if (!tokenRole.equals("admin")) {
+//                throw new MyException("admin이 아닙니다");
+//            }
+            log.info(contentDTO.getContent(), contentDTO.getAuthor());
 
-        return jwtResult;
+            return "admin이 맞습니다";
     }
 }
